@@ -196,7 +196,7 @@ namespace arduino {
             pixel_type px;
             return fill(bounds,px);
         }
-        gfx::gfx_result point(gfx::point16 location,pixel_type* out_color) {
+        gfx::gfx_result point(gfx::point16 location,pixel_type* out_color) const {
             if(!initialized()) {
                 return gfx::gfx_result::invalid_state;
             }
@@ -206,7 +206,7 @@ namespace arduino {
             int8_t ch = x_to_channel(location.x);
             if(ch!=-1) {
                 using t = typename pixel_type::int_type;
-                out_color->channel<0>((t)ledcRead(ch));
+                out_color->template channel<0>((t)ledcRead(ch));
             }
             return gfx::gfx_result::success;
         }
